@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Jabber chat lol</title>
+  <script language='javascript' 
+	  type='text/javascript'
+	  src='jquery-1.2.6.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='b64.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='md5.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='sha1.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='strophe.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='jabberchat.js'></script>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id='login' style='text-align: center'>
+    <form name='cred'>
+      <label for='jid'>JID:</label>
+      <input type='text' id='jid' />
+      <label for='pass'>Password:</label>
+      <input type='password' id='pass' />
+      <input type='button' id='connect' value='connect' />
+    </form>
+  </div>
+  <hr />
+  <div id='messages'>
+    <h5>Messages:</h5>
+  </div>
+  <hr />
+  <div id='entry' style='display: none'>
+    <h5> Send a Message: </h5>
+    <form name='out-message'>
+      <label for='outjid'>JID:</label>
+      <input type='text' id='outjid' />
+      <label for='outtext'>Text:</label>
+      <input type='text' id='outtext' />
+      <input type='button' id='send' value='send' />
+    </form>
+      
+  </div>
+  <div id='log'></div>
+</body>
+
+</html>
