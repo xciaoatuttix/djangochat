@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>xmpp chat client</title>
+  <script language='javascript' 
+	  type='text/javascript'
+	  src='jquery-1.2.6.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='b64.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='md5.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='sha1.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='strophe.js'></script>
+  <script language='javascript'
+	  type='text/javascript'
+	  src='xmppclient.js'></script>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id='login' style='text-align: center'>
+    <form name='cred'>
+      <label for='jid'>JID:</label>
+      <input type='text' id='jid' class='userjid'/>
+      <label for='pass'>Password:</label>
+      <input type='password' id='pass' class='userpass'/>
+      <input type='button' id='connect' class='connect' value='connect' />
+    </form>
+  </div>
+  <hr />
+  <div><label class='status'></div>
+  <hr />
+  <div id='roster' class='roster'>
+    <h4> Roster </h4>
+  </div>
+  <hr />
+  <div id='messages' class='chatwindow'>
+    <h5>Messages:</h5>
+  </div>
+  <hr />
+  <div id='entry' style='display: none'>
+    <form name='out-message'>
+      <label for='outtext'>Text:</label>
+      <input type='text' id='outtext' class='chatmesg'/>
+      <input type='button' id='send' class='chatsend' value='send' />
+    </form>
+      
+  </div>
+  <div id='log'></div>
+</body>
+
+</html>
