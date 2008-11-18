@@ -21,7 +21,10 @@
   <script language='javascript'
 	  type='text/javascript'
 	  src='xmppclient.js'></script>
-  <link type="text/css" rel="stylesheet" href="style.css" />
+  <script language='javascript'
+	  type='text/javascript'
+	  src='test.js'></script>
+  <link type="text/css" rel="stylesheet" href="media/style.css" />
 </head>
 
 <body>
@@ -34,17 +37,20 @@
       <input type='button' id='connect' class='connect' value='connect' />
     </form>
   </div>
-  <hr />
-  <div><label class='status'></div>
-  <hr />
-  <div id='roster' class='roster'>
-    <h4> Roster </h4>
+  <div>
+    <label>Status is:</label>
+    <label id='status'> </label>
   </div>
-  <hr />
+  
+  <div id='rosterContainer'>
+    <div id='rosterHeader'>Roster</div>
+    <div id='roster' class='roster'></div>
+  </div>
+
   <div id='messages' class='chatwindow'>
-    <h5>Messages:</h5>
+    <h5 id='messagesHead'>Message Window</h5>
   </div>
-  <hr />
+
   <div id='entry' style='display: none'>
     <form name='out-message'>
       <label for='outtext'>Text:</label>

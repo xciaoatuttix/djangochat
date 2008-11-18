@@ -3,7 +3,7 @@ from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
 def login(request):
-    template = loader.get_template('jabberchat/jabberchat.html')
+    template = loader.get_template('jabberchat/xmppchat.html')
     c = Context()
     return HttpResponse(template.render(c))
 
