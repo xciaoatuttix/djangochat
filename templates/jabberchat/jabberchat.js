@@ -1,4 +1,5 @@
 var BOSH_SERVICE = 'http://localhost/http-bind/';
+var RESOURCE = '/workbooklol';
 var connection = null;
 
 function log(msg)
@@ -21,10 +22,12 @@ function onConnect(status)
 	$('#entry').css("display", "block");
     } else if (status == Strophe.Status.CONNECTED) {
 	log('Strophe is connected.');
-      $('#entry').css("display", "block");
+      $('#entry').css("display", "none");
 
-	connection.addHandler(onMessage, null, 'message', null, null,  null);
-	connection.send($pres().tree());
+      connection.addHandler(onMessage, null, 'message', null, null,  null);
+      connection.addHandler(receiveRoster, 'jabber:iq:roster' , null, null, null, null);
+      requestRoster();
+      connection.send($pres().tree());
     }
 }
 
@@ -49,6 +52,33 @@ function onMessage(msg) {
     // returning false would remove it after it finishes.
   return true;
 }
+
+function receiveRoster(msg) {
+  if(msg.hasChildNodes()) {
+    var query = msg.childNodes[0];
+    $('#roster').append('<ul></ul>');
+    if (query.hasChildNodes()) {
+      for (var i=0; i<query.childNodes.length; ++i) {
+	var listElt = document.createElement('li');
+	var textNode = document.createTextNode(query.childNodes[i].getAttribute('jid'));
+	listElt.appendChild(textNode);
+	$('#roster > *')[0].appendChild(listElt);
+
+      }
+    }
+  }
+
+  return true;
+}
+
+function requestRoster() {
+  var query = $iq({from: 'user1@localhost/workbooklol', type: 'get', id: connection.getUniqueId()});
+  query.c('query', {xmlns: 'jabber:iq:roster'} );
+  connection.send(query.tree());
+
+  return true;
+}
+
 
 function sendMessage() {
   var jid = $('#outjid').val();
@@ -80,8 +110,8 @@ $(document).ready(function () {
 			   var button = $('#connect').get(0);
 			   if (button.value == 'connect') {
 			     button.value = 'disconnect';
-
-			     connection.connect($('#jid').get(0).value,
+			     var fulljid = $('#jid')[0].value + RESOURCE;
+			     connection.connect(fulljid,
 						$('#pass').get(0).value,
 						onConnect);
 			   } else {
