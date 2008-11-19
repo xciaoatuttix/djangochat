@@ -1,0 +1,61 @@
+
+body {
+    margin:0px 0px 0px 0px;
+    padding-top: 10px;
+}
+
+h4 {
+    color: green;
+}
+
+#rosterContainer {
+    float: left;
+    width: 200px;
+    border: 10px solid green;
+}
+
+#rosterHeader {
+width: 100%;
+}
+
+#roster {
+    float:left;
+    border:2px solid #000;
+
+}
+
+#messages {
+    width: 30%;
+    float: left;
+    border: solid red 2px;
+    padding-left: 10px;
+}
+
+	
+.rosterEntry {
+    border: solid yellow 1px;
+}
+
+table#rosterTable {
+    background-color: purple;
+    border: solid #000 3px;
+
+}
+
+table#sample td {
+    padding: 5px;
+    border: solid #000 1px;
+
+}
+
+td:hover {
+    background-color: red;
+}
+
+textarea.msgBody {
+	width: 100%;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+}
