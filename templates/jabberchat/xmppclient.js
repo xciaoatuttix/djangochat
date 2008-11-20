@@ -111,16 +111,17 @@ function XmppClient_init() {
   this.stropheConnection = new Strophe.Connection(this.boshUrl);
   this.chatManager = new ChatManager(document.getElementById(this.messageHook));
   $('.connect').click(function () {
+			var client = this;
 			var button = $('.connect').get(0);
 			if (button.value == 'connect') {
 			  button.value = 'disconnect';
 			  var fulljid = $('.userjid')[0].value + RESOURCE;
-			  this.stropheConnection.connect(fulljid,
+			  client.stropheConnection.connect(fulljid,
 					     $('.userpass').get(0).value,
 					     this.onConnect);
 			} else {
 			  button.value = 'connect';
-			  this.stropheConnection.disconnect();
+			  client.stropheConnection.disconnect();
 			 }
 			}
 		     );
