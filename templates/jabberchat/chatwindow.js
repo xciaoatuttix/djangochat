@@ -8,7 +8,7 @@ function ChatWindow_addLine(text) {
   this.mesgHook.scrollTop = this.mesgHook.scrollHeight; // keep textarea at bottom
 }
 
-function ChatWindow(name, sendMesgFunc) {
+function ChatWindow(clientName, toName, sendMesgFunc) {
   var div = document.createElement('div');
   var head = document.createElement('label');
   var form = document.createElement('form');
@@ -16,8 +16,10 @@ function ChatWindow(name, sendMesgFunc) {
   var text = document.createElement('input');
   var button = document.createElement('input');
   var chatWindow = this;
-
-  div.setAttribute('id', name);
+  this.clearTextInput = function() {
+    text.value = '';
+  };
+  div.setAttribute('id', toName);
   div.appendChild(head);
   div.appendChild(form);
   form.appendChild(mesgs);
@@ -27,14 +29,13 @@ function ChatWindow(name, sendMesgFunc) {
   button.setAttribute('type', 'button');
   text.setAttribute('type', 'text');
   mesgs.setAttribute('class', 'msgBody');
-  head.appendChild(document.createTextNode('Chat with: ' + name));
+  head.appendChild(document.createTextNode('Chat with: ' + toName));
   mesgs.readOnly = true;
   button.value = 'Send';
-  button.onclick = function () {
-    chatWindow.addLine(name + ': ' + text.value);
-    sendMesgFunc(name, text.value);
-    text.value = '';
+  button.onclick = function() {
+    sendMesgFunc(text.value);
   };
+
   this.divHook = div;
   this.mesgHook = mesgs;
 }

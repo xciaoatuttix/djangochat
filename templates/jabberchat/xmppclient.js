@@ -19,16 +19,17 @@
 
 function XmppClient_init() {
   var client = this; // Allows the callback to close over reference to this
+  this.clientName = $('.userjid')[0].value + this.resourceName;
   this.stropheConnection = new Strophe.Connection(this.boshUrl);
   this.chatManager = new ChatManager(document.getElementById(this.messageHook),
-				     function(to, text) {
-				       client.sendMessage(to, text);
-				     });
+				     this.clientName,
+				     this.sendMessage);
+
   $('.connect').click(function () {
 			var button = $('.connect').get(0);
 			if (button.value == 'connect') {
 			  button.value = 'disconnect';
-			  var fulljid = $('.userjid')[0].value + RESOURCE;
+			  var fulljid = $('.userjid')[0].value + client.resourceName;
 			  client.stropheConnection.connect(fulljid,
 					     $('.userpass').get(0).value,
 					     client.onConnect);
@@ -103,15 +104,16 @@ function XmppClient_onMessage(client, msg) {
 }
 
 function XmppClient_sendMessage(client, recipient, messageText) {
-  var from = $('.userjid')[0].value + RESOURCE;
+  var from = $('.userjid')[0].value + client.resourceName;
   var message = $msg({to: recipient, from: from, type: 'chat'}).c("body").t(messageText);
+  client.chatManager.receiveMessage(message.tree()); // So message shows up in client
   client.stropheConnection.send(message.tree());
   return true;
 }
 
 
 function XmppClient_requestRoster(client) {
-  var query = $iq({from: $('.userjid')[0].value + RESOURCE, type: 'get', id: client.stropheConnection.getUniqueId()});
+  var query = $iq({from: $('.userjid')[0].value + client.resourceName, type: 'get', id: client.stropheConnection.getUniqueId()});
   query.c('query', {xmlns: 'jabber:iq:roster'} );
   client.stropheConnection.send(query.tree());
 
@@ -149,6 +151,7 @@ function XmppClient(boshUrl, resourceName) {
   this.stropheConnection = null;
   this.chatManager = null;
   this.messageHook = 'messages';
+  this.clientName = null;
   var client = this; // We close over this
 
   this.onConnect = function(status) {
