@@ -45,9 +45,10 @@ function ChatManager_processIncomingMessage(msg) {
     this.openChats[chatName].addLine(entry);
     this.openChats[chatName].clearTextInput();
   } else {
-    var newChatW = new ChatWindow(otherName, chatName,
+    var client = this;
+    var newChatW = new ChatWindow(to, chatName,
 				  function(mesgText) {
-				    chatmngr.sendMesgFunc(chatName, mesgText);
+				    client.sendMesgFunc(chatName, mesgText);
 				 });
 
     this.openChats[chatName] = newChatW;

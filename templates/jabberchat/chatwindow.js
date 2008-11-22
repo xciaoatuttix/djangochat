@@ -28,6 +28,7 @@ function ChatWindow(clientName, toName, sendMesgFunc) {
   form.setAttribute('onSubmit', "return false");
   button.setAttribute('type', 'button');
   text.setAttribute('type', 'text');
+  text.setAttribute('class', 'msgInput');
   mesgs.setAttribute('class', 'msgBody');
   head.appendChild(document.createTextNode('Chat with: ' + toName));
   mesgs.readOnly = true;
