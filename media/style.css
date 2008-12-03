@@ -59,4 +59,9 @@ textarea.msgBody {
 	border: 3px solid #cccccc;
 	padding: 5px;
 	font-family: Tahoma, sans-serif;
+	background-color: light-blue;
+}
+
+input.msgInput {
+    background-color: gray;
 }
